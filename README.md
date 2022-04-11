@@ -100,10 +100,10 @@ rqt-graph
 
 ---------------------------------
 
-## Example
+## Examples
 
 ### Example 1
-key file:
+key files:
 > models/basic_mobile_bot_v1/basic_mobile_bot_v1.urdf
 > rviz/basic_mobile_bot_v1/urdf_config.rviz
 > meshes/*
@@ -114,3 +114,14 @@ key file:
 ```sh
 ros2 launch basic_mobile_robot basic_mobile_bot_v1.launch.py
 ```
+
+### Example2
+key files:
+> models/basic_mobile_bot_description_v1/*
+> worlds/basic_mobile_bot_world/smalltown.world
+> launch/basic_mobile_bot_v2.launch.py
+> ros2 topic echo /wheel/odometry
+```sh
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
+```
+basic_mobile_bot_description_v1
