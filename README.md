@@ -108,12 +108,12 @@ rqt-graph
 
 ### Example 1 (urdf, joint_state_publisher, robot_state_publisher)
 key files:
-> models/basic_mobile_bot_v1.urdf
-> rviz/urdf_config_v1.rviz
-> meshes/*
-> package.xml
-> CMakeLists.txt
-> launch/basic_mobile_bot_v1.launch.py
+> models/basic_mobile_bot_v1.urdf  
+> rviz/urdf_config_v1.rviz  
+> meshes/*  
+> package.xml  
+> CMakeLists.txt  
+> launch/basic_mobile_bot_v1.launch.py  
 
 ```sh
 ros2 launch basic_mobile_robot basic_mobile_bot_v1.launch.py
@@ -121,9 +121,9 @@ ros2 launch basic_mobile_robot basic_mobile_bot_v1.launch.py
 
 ### Example2 (sdf, Gazebo’s IMU sensor plugin,  Gazebo’s differential drive plugin)
 key files:
-> models/basic_mobile_bot_description_v1/*
-> worlds/basic_mobile_bot_world_v1/smalltown.world
-> launch/basic_mobile_bot_v2.launch.py
+> models/basic_mobile_bot_description_v1/*  
+> worlds/basic_mobile_bot_world_v1/smalltown.world  
+> launch/basic_mobile_bot_v2.launch.py  
 
 ```sh
 export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
@@ -139,9 +139,9 @@ ros2 topic info /wheel/odometry
 
 ### Example3 ( robot_localization package, ekf.yaml )
 key files:
-> config/ekf.yaml
-> package.xml
-> launch/basic_mobile_bot_v3.launch.py
+> config/ekf_v1.yaml  
+> package.xml  
+> launch/basic_mobile_bot_v3.launch.py  
 
 
 ```sh
@@ -160,11 +160,11 @@ evince frames.pdf
 
 ### Example4 ( lidar(libgazebo_ros_ray_sensor.so) )
 key files:
-> models/basic_mobile_bot_v2.urdf
-> models/basic_mobile_bot_description_v2/*
-> worlds/basic_mobile_bot_world_v2/smalltown.world
-> rviz/urdf_config_v2.rviz (urdf_config_v1 is still fine)
-> launch/basic_mobile_bot_v4.launch.py
+> models/basic_mobile_bot_v2.urdf  
+> models/basic_mobile_bot_description_v2/*  
+> worlds/basic_mobile_bot_world_v2/smalltown.world  
+> rviz/urdf_config_v2.rviz (urdf_config_v1 is also fine)  
+> launch/basic_mobile_bot_v4.launch.py  
 
 
 ```sh
@@ -174,3 +174,18 @@ ros2 launch basic_mobile_robot basic_mobile_bot_v4.launch.py
 ros2 topic info /scan
 ```
 
+### Example5 ( nav2 )
+*Note*: Remember to set pose estimate in rviz2
+key files:
+> config/ekf_v2.yaml  
+> params/nav2_params.yaml
+> models/basic_mobile_bot_description_v3/*  
+> worlds/basic_mobile_bot_world_v3/smalltown.world  
+> rviz/nav2_config.rviz
+> maps/*
+> launch/basic_mobile_bot_v5.launch.py  
+
+```sh
+killall gazebo; killall gzserver; killall gzclient
+ros2 launch basic_mobile_robot basic_mobile_bot_v5.launch.py
+```
