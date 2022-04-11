@@ -1,5 +1,7 @@
 # basic_mobile_robot
 
+https://automaticaddison.com/the-ultimate-guide-to-the-ros-2-navigation-stack/
+
 ## Install ROS2
 
 ### SSH (WSL)
@@ -85,11 +87,13 @@ sudo apt install -y ros-foxy-navigation2
 sudo apt install -y ros-foxy-nav2-bringup
 sudo apt install -y ros-foxy-joint-state-publisher-gui
 sudo apt install -y ros-foxy-xacro
+sudo apt install -y ros-foxy-robot-localization
 ```
 
 ### Other tools
 ```sh
 sudo apt install ros-foxy-tf2-tools
+sudo apt install evince
 ros2 run tf2_tools view_frames.py
 evince frames.pdf
 
@@ -102,7 +106,7 @@ rqt-graph
 
 ## Examples
 
-### Example 1
+### Example 1 (urdf, joint_state_publisher, robot_state_publisher)
 key files:
 > models/basic_mobile_bot_v1/basic_mobile_bot_v1.urdf
 > rviz/basic_mobile_bot_v1/urdf_config.rviz
@@ -115,13 +119,42 @@ key files:
 ros2 launch basic_mobile_robot basic_mobile_bot_v1.launch.py
 ```
 
-### Example2
+### Example2 (sdf, Gazebo’s IMU sensor plugin,  Gazebo’s differential drive plugin)
 key files:
 > models/basic_mobile_bot_description_v1/*
 > worlds/basic_mobile_bot_world/smalltown.world
 > launch/basic_mobile_bot_v2.launch.py
-> ros2 topic echo /wheel/odometry
+
 ```sh
 export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
 ```
-basic_mobile_bot_description_v1
+```sh
+killall gazebo
+killall gzserver
+killall gzclient
+ros2 launch basic_mobile_robot basic_mobile_bot_v2.launch.py
+
+# ros2 topic echo /wheel/odometry
+# ros2 topic info /imu/data
+# ros2 topic info /wheel/odometry
+```
+
+### Example3 ( robot_localization package, ekf.yaml )
+key files:
+> config/ekf.yaml
+> package.xml
+> launch/basic_mobile_bot_v3.launch.py
+
+
+```sh
+ros2 launch basic_mobile_robot basic_mobile_bot_v3.launch.py
+
+# ros2 topic info /imu/data
+# ros2 topic info /wheel/odometry
+# ros2 topic echo /odometry/filtered
+# ros2 node info /ekf_filter_node
+# ros2 run tf2_ros tf2_echo odom base_footprint
+# ros2 run tf2_tools view_frames.py
+# evince frames.pdf
+
+```
