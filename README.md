@@ -108,8 +108,8 @@ rqt-graph
 
 ### Example 1 (urdf, joint_state_publisher, robot_state_publisher)
 key files:
-> models/basic_mobile_bot_v1/basic_mobile_bot_v1.urdf
-> rviz/basic_mobile_bot_v1/urdf_config.rviz
+> models/basic_mobile_bot_v1.urdf
+> rviz/urdf_config_v1.rviz
 > meshes/*
 > package.xml
 > CMakeLists.txt
@@ -122,21 +122,19 @@ ros2 launch basic_mobile_robot basic_mobile_bot_v1.launch.py
 ### Example2 (sdf, Gazebo’s IMU sensor plugin,  Gazebo’s differential drive plugin)
 key files:
 > models/basic_mobile_bot_description_v1/*
-> worlds/basic_mobile_bot_world/smalltown.world
+> worlds/basic_mobile_bot_world_v1/smalltown.world
 > launch/basic_mobile_bot_v2.launch.py
 
 ```sh
 export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
 ```
 ```sh
-killall gazebo
-killall gzserver
-killall gzclient
+killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v2.launch.py
 
-# ros2 topic echo /wheel/odometry
-# ros2 topic info /imu/data
-# ros2 topic info /wheel/odometry
+ros2 topic echo /wheel/odometry
+ros2 topic info /imu/data
+ros2 topic info /wheel/odometry
 ```
 
 ### Example3 ( robot_localization package, ekf.yaml )
@@ -147,6 +145,7 @@ key files:
 
 
 ```sh
+killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v3.launch.py
 
 # ros2 topic info /imu/data
@@ -154,7 +153,24 @@ ros2 launch basic_mobile_robot basic_mobile_bot_v3.launch.py
 # ros2 topic echo /odometry/filtered
 # ros2 node info /ekf_filter_node
 # ros2 run tf2_ros tf2_echo odom base_footprint
-# ros2 run tf2_tools view_frames.py
-# evince frames.pdf
+ros2 run tf2_tools view_frames.py
+evince frames.pdf
 
 ```
+
+### Example4 ( lidar(libgazebo_ros_ray_sensor.so) )
+key files:
+> models/basic_mobile_bot_v2.urdf
+> models/basic_mobile_bot_description_v2/*
+> worlds/basic_mobile_bot_world_v2/smalltown.world
+> rviz/urdf_config_v2.rviz (urdf_config_v1 is still fine)
+> launch/basic_mobile_bot_v4.launch.py
+
+
+```sh
+killall gazebo; killall gzserver; killall gzclient
+ros2 launch basic_mobile_robot basic_mobile_bot_v4.launch.py
+
+ros2 topic info /scan
+```
+
