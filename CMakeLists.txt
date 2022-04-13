@@ -42,8 +42,8 @@ install(PROGRAMS
   # scripts/lift_controller.py
   # scripts/nav_to_pose.py
   # scripts/nav_through_poses.py
-  scripts/pick_and_deliver.py
-  scripts/robot_navigator.py
+  # scripts/pick_and_deliver.py
+  # scripts/robot_navigator.py
   # scripts/security_demo.py
   # scripts/waypoint_follower.py
   # scripts/battery_state/battery_state_pub.py

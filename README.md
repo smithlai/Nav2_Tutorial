@@ -108,6 +108,7 @@ rqt-graph
 
 ### Example 0 (gazebo world))
 > https://automaticaddison.com/how-to-load-a-world-file-into-gazebo-ros-2/  
+> https://automaticaddison.com/useful-world-files-for-gazebo-and-ros-2-simulations/
 > https://github.com/osrf/gazebo/tree/gazebo11/worlds  
 
 ```sh
