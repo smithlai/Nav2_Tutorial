@@ -65,8 +65,8 @@ sudo apt install python3-colcon-common-extensions
 echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
 # Domain (0~232) https://docs.ros.org/en/foxy/Concepts/About-Domain-ID.html#domain-id-to-udp-port-calculator
 # echo "export ROS_DOMAIN_ID=9" >> ~/.bashrc
-echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
-echo 'export LC_NUMERIC="en_US.UTF-8"' >> ~/.bashrc
+# echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
+# echo 'export LC_NUMERIC="en_US.UTF-8"' >> ~/.bashrc
 ```
 
 
@@ -94,7 +94,9 @@ sudo apt install -y ros-foxy-robot-localization
 ```sh
 sudo apt install ros-foxy-tf2-tools
 sudo apt install evince
-ros2 run tf2_tools view_frames.py
+
+ros2 run tf2_tools view_frames  # galactic
+#ros2 run tf2_tools view_frames.py  # foxy
 evince frames.pdf
 
 sudo apt install -y ros-foxy-rqt*
