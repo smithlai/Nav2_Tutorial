@@ -106,7 +106,25 @@ rqt-graph
 
 ## Examples
 
-### Example 1.a (urdf, joint_state_publisher, robot_state_publisher)
+### Example 0 (gazebo world))
+> https://automaticaddison.com/how-to-load-a-world-file-into-gazebo-ros-2/  
+> https://github.com/osrf/gazebo/tree/gazebo11/worlds  
+
+```sh
+mkdir  ~/dev_ws/src/basic_mobile_robot/models/cafe_world
+cp -r ~/.gazebo/models/ground_plane ~/dev_ws/src/basic_mobile_robot/models/cafe_world
+cp -r ~/.gazebo/models/cafe ~/dev_ws/src/basic_mobile_robot/models/cafe_world
+cp -r ~/.gazebo/models/cafe_table ~/dev_ws/src/basic_mobile_robot/models/cafe_world
+mkdir  ~/dev_ws/src/basic_mobile_robot/worlds/cafe_world
+cp /usr/share/gazebo-11/worlds/cafe.world ~/dev_ws/src/basic_mobile_robot/worlds/cafe_world
+
+ros2 launch two_wheeled_robot load_world_into_gazebo.launch.py
+# gazebo_models_path = os.path.join(pkg_share, 'models', 'cafe_world')
+# os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
+
+```
+
+### Example 1 (urdf, joint_state_publisher, robot_state_publisher)
 key files:
 > models/basic_mobile_bot_v1.urdf  
 > rviz/urdf_config_v1.rviz  
@@ -118,16 +136,6 @@ key files:
 ```sh
 ros2 launch basic_mobile_robot basic_mobile_bot_v1.launch.py
 ```
-### Example 1.b (Another example)
-https://automaticaddison.com/how-to-load-a-urdf-file-into-rviz-ros-2/
-key files:
-> models/two_wheeled_robot_v1.urdf
-> rviz/two_wheeled_robot_v1.rviz 
-> meshes/robot_base.stl  
-> package.xml  
-> CMakeLists.txt  
-> launch/two_wheeled_robot_v1.launch.py  
-
 
 ### Example2 (sdf, Gazebo’s IMU sensor plugin,  Gazebo’s differential drive plugin)
 key files:
@@ -185,7 +193,7 @@ ros2 topic info /scan
 ```
 
 ### Example5 ( nav2 )
-*Note*: Remember to set pose estimate in rviz2  
+*Note*: Remember to set pose estimate in rviz2
 key files:
 > config/ekf_v2.yaml  
 > params/nav2_params.yaml
