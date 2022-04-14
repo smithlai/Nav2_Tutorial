@@ -31,7 +31,7 @@ identityfile    ~/.ssh/githubsmith
 ```
 
 ### Install ROS 2 Debian(Ubuntu 20)
-https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
+https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html
 
 #### ===== 1.locale
 ```sh
@@ -58,8 +58,8 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 #### ===== 3.Install ROS 2 packages
 ```sh
 sudo apt update
-sudo apt install -y ros-foxy-desktop
-#### sudo apt install ros-foxy-ros-base
+sudo apt install -y ros-galactic-desktop
+#### sudo apt install ros-galactic-ros-base
 sudo apt install -y python3-rosdep2
 
 
@@ -67,16 +67,16 @@ sudo rosdep init
 rosdep update
 # build前執行
 # cd ~/ROS2_WS/dev_ws/
-# rosdep install -i --from-path src --rosdistro foxy -y
+# rosdep install -i --from-path src --rosdistro galactic -y
 
 #colcon
 sudo apt install python3-colcon-common-extensions
 ```
 #### ===== 4.Add sourcing to your shell startup script
-> https://docs.ros.org/en/foxy/Tutorials/Configuring-ROS2-Environment.html
+> https://docs.ros.org/en/galactic/Tutorials/Configuring-ROS2-Environment.html
 ```sh
-echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
-# Domain (0~232) https://docs.ros.org/en/foxy/Concepts/About-Domain-ID.html#domain-id-to-udp-port-calculator
+echo "source /opt/ros/galactic/setup.bash" >> ~/.bashrc
+# Domain (0~232) https://docs.ros.org/en/galactic/Concepts/About-Domain-ID.html#domain-id-to-udp-port-calculator
 # echo "export ROS_DOMAIN_ID=9" >> ~/.bashrc
 # echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
 # echo 'export LC_NUMERIC="en_US.UTF-8"' >> ~/.bashrc
@@ -87,32 +87,32 @@ echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
 
 ```sh
 sudo apt update
-sudo apt-get -y install ros-foxy-gazebo-*
+sudo apt-get -y install ros-galactic-gazebo-*
 
 # Install Cartographer
 # https://github.com/ros2/cartographer_ros
 # This is hard to compile
-# sudo apt install -y ros-foxy-cartographer
-# sudo apt install -y ros-foxy-cartographer-ros
+# sudo apt install -y ros-galactic-cartographer
+# sudo apt install -y ros-galactic-cartographer-ros
 # Install Navigation2
 
-sudo apt install -y ros-foxy-navigation2
-sudo apt install -y ros-foxy-nav2-bringup
-sudo apt install -y ros-foxy-joint-state-publisher-gui
-sudo apt install -y ros-foxy-xacro
-sudo apt install -y ros-foxy-robot-localization
+sudo apt install -y ros-galactic-navigation2
+sudo apt install -y ros-galactic-nav2-bringup
+sudo apt install -y ros-galactic-joint-state-publisher-gui
+sudo apt install -y ros-galactic-xacro
+sudo apt install -y ros-galactic-robot-localization
 ```
 
 ### Other tools
 ```sh
-sudo apt install ros-foxy-tf2-tools
+sudo apt install ros-galactic-tf2-tools
 sudo apt install evince
 
 ros2 run tf2_tools view_frames  # galactic
 #ros2 run tf2_tools view_frames.py  # foxy
 evince frames.pdf
 
-sudo apt install -y ros-foxy-rqt*
+sudo apt install -y ros-galactic-rqt*
 rqt-graph
 ```
 
@@ -154,6 +154,7 @@ ros2 launch basic_mobile_robot basic_mobile_bot_v1.launch.py
 ```
 
 ### Example2 (sdf, Gazebo’s IMU sensor plugin,  Gazebo’s differential drive plugin)
+*Note*: Remember to export GAZEBO_MODEL_PATH, or the robot model will be lost  
 key files:
 > models/basic_mobile_bot_description_v1/*  
 > worlds/basic_mobile_bot_world_v1/smalltown.world  
@@ -173,6 +174,7 @@ ros2 topic info /wheel/odometry
 ```
 
 ### Example3 ( robot_localization package, ekf.yaml )
+*Note*: Remember to export GAZEBO_MODEL_PATH, or the robot model will be lost  
 key files:
 > config/ekf_v1.yaml  
 > package.xml  
@@ -180,6 +182,7 @@ key files:
 
 
 ```sh
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v3.launch.py
 
@@ -194,6 +197,7 @@ ros2 run tf2_tools view_frames && evince frames.pdf
 ```
 
 ### Example4 ( lidar(libgazebo_ros_ray_sensor.so) )
+*Note*: Remember to export GAZEBO_MODEL_PATH, or the robot model will be lost  
 key files:
 > models/basic_mobile_bot_v2.urdf  
 > models/basic_mobile_bot_description_v2/*  
@@ -203,6 +207,7 @@ key files:
 
 
 ```sh
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v4.launch.py
 
@@ -210,6 +215,7 @@ ros2 topic info /scan
 ```
 
 ### Example5 ( nav2 )
+*Note*: Remember to export GAZEBO_MODEL_PATH, or the robot model will be lost  
 *Note*: Remember to set pose estimate in rviz2
 key files:
 > config/ekf_v2.yaml  
@@ -221,6 +227,7 @@ key files:
 > launch/basic_mobile_bot_v5.launch.py  
 
 ```sh
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v5.launch.py
 # slam mode
