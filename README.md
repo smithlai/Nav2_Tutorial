@@ -154,15 +154,11 @@ ros2 launch basic_mobile_robot basic_mobile_bot_v1.launch.py
 ```
 
 ### Example2 (sdf, Gazebo’s IMU sensor plugin,  Gazebo’s differential drive plugin)
-*Note*: Remember to export GAZEBO_MODEL_PATH, or the robot model will be lost  
 key files:
 > models/basic_mobile_bot_description_v1/*  
 > worlds/basic_mobile_bot_world_v1/smalltown.world  
 > launch/basic_mobile_bot_v2.launch.py  
 
-```sh
-export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
-```
 ```sh
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v2.launch.py
@@ -174,7 +170,6 @@ ros2 topic info /wheel/odometry
 ```
 
 ### Example3 ( robot_localization package, ekf.yaml )
-*Note*: Remember to export GAZEBO_MODEL_PATH, or the robot model will be lost  
 key files:
 > config/ekf_v1.yaml  
 > package.xml  
@@ -182,7 +177,6 @@ key files:
 
 
 ```sh
-export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v3.launch.py
 
@@ -197,7 +191,6 @@ ros2 run tf2_tools view_frames && evince frames.pdf
 ```
 
 ### Example4 ( lidar(libgazebo_ros_ray_sensor.so) )
-*Note*: Remember to export GAZEBO_MODEL_PATH, or the robot model will be lost  
 key files:
 > models/basic_mobile_bot_v2.urdf  
 > models/basic_mobile_bot_description_v2/*  
@@ -207,7 +200,6 @@ key files:
 
 
 ```sh
-export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v4.launch.py
 
@@ -215,7 +207,6 @@ ros2 topic info /scan
 ```
 
 ### Example5 ( nav2 )
-*Note*: Remember to export GAZEBO_MODEL_PATH, or the robot model will be lost  
 *Note*: Remember to set pose estimate in rviz2
 key files:
 > config/ekf_v2.yaml  
@@ -227,7 +218,6 @@ key files:
 > launch/basic_mobile_bot_v5.launch.py  
 
 ```sh
-export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/models/
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v5.launch.py
 # slam mode

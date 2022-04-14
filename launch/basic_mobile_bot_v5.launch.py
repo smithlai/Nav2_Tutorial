@@ -24,6 +24,10 @@ def generate_launch_description():
   default_rviz_config_path = os.path.join(pkg_share, 'rviz/nav2_config.rviz')
   world_file_name = 'basic_mobile_bot_world_v3/smalltown.world'
   world_path = os.path.join(pkg_share, 'worlds', world_file_name)
+
+  gazebo_models_path = os.path.join(pkg_share, "models")
+  os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
+
   nav2_dir = FindPackageShare(package='nav2_bringup').find('nav2_bringup') 
   nav2_launch_dir = os.path.join(nav2_dir, 'launch') 
   static_map_path = os.path.join(pkg_share, 'maps', 'smalltown_world.yaml')

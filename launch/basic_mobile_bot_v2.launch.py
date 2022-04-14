@@ -23,7 +23,10 @@ def generate_launch_description():
   default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config_v1.rviz')
   world_file_name = 'basic_mobile_bot_world_v1/smalltown.world'
   world_path = os.path.join(pkg_share, 'worlds', world_file_name)
-   
+  
+  gazebo_models_path = os.path.join(pkg_share, "models")
+  os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
+
   # Launch configuration variables specific to simulation
   headless = LaunchConfiguration('headless')
   model = LaunchConfiguration('model')
