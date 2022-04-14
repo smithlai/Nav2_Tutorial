@@ -16,6 +16,19 @@ PasswordAuthentication yes
 > sshd: no hostkeys available -- exiting.
 `sudo dpkg-reconfigure openssh-server`
 
+### github請看這
+https://cynthiachuang.github.io/Generating-a-Ssh-Key-and-Adding-It-to-the-Github/
+# ssh-keygen -t ed25519 -C "smith.lai@gmail.com"
+# vim ~/.ssh/config
+```
+# - github
+Host            github.com
+Hostname        github.com
+# Port            222
+User            smithlai
+identityfile    ~/.ssh/githubsmith
+
+```
 
 ### Install ROS 2 Debian(Ubuntu 20)
 https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
@@ -152,6 +165,7 @@ export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/dev_ws/src/basic_mobile_robot/mode
 ```sh
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v2.launch.py
+ros2 run rqt_robot_steering rqt_robot_steering --force-discover
 
 ros2 topic echo /wheel/odometry
 ros2 topic info /imu/data
@@ -174,8 +188,8 @@ ros2 launch basic_mobile_robot basic_mobile_bot_v3.launch.py
 # ros2 topic echo /odometry/filtered
 # ros2 node info /ekf_filter_node
 # ros2 run tf2_ros tf2_echo odom base_footprint
-ros2 run tf2_tools view_frames.py
-evince frames.pdf
+# # ros2 run tf2_tools view_frames.py && evince frames.pdf  #foxy
+ros2 run tf2_tools view_frames && evince frames.pdf
 
 ```
 
@@ -209,4 +223,9 @@ key files:
 ```sh
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot basic_mobile_bot_v5.launch.py
+# slam mode
+ros2 launch basic_mobile_robot basic_mobile_bot_v5.launch.py slam:=True
+ros2 run rqt_robot_steering rqt_robot_steering --force-discover
+# map server (this command is invalid in older foxy, refers to the tutorial)
+ros2 run nav2_map_server map_saver_cli -f my_map
 ```
