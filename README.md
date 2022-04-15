@@ -121,25 +121,6 @@ rqt-graph
 
 ## Examples
 
-### Example 0 (gazebo world))
-> https://automaticaddison.com/how-to-load-a-world-file-into-gazebo-ros-2/  
-> https://automaticaddison.com/useful-world-files-for-gazebo-and-ros-2-simulations/
-> https://github.com/osrf/gazebo/tree/gazebo11/worlds  
-
-```sh
-mkdir  ~/dev_ws/src/basic_mobile_robot/models/cafe_world
-cp -r ~/.gazebo/models/ground_plane ~/dev_ws/src/basic_mobile_robot/models/cafe_world
-cp -r ~/.gazebo/models/cafe ~/dev_ws/src/basic_mobile_robot/models/cafe_world
-cp -r ~/.gazebo/models/cafe_table ~/dev_ws/src/basic_mobile_robot/models/cafe_world
-mkdir  ~/dev_ws/src/basic_mobile_robot/worlds/cafe_world
-cp /usr/share/gazebo-11/worlds/cafe.world ~/dev_ws/src/basic_mobile_robot/worlds/cafe_world
-
-ros2 launch two_wheeled_robot load_world_into_gazebo.launch.py
-# gazebo_models_path = os.path.join(pkg_share, 'models', 'cafe_world')
-# os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
-
-```
-
 ### Example 1 (urdf, joint_state_publisher, robot_state_publisher)
 key files:
 > models/basic_mobile_bot_v1.urdf  
@@ -225,4 +206,47 @@ ros2 launch basic_mobile_robot basic_mobile_bot_v5.launch.py slam:=True
 ros2 run rqt_robot_steering rqt_robot_steering --force-discover
 # map server (this command is invalid in older foxy, refers to the tutorial)
 ros2 run nav2_map_server map_saver_cli -f my_map
+```
+
+
+### Example B1 (gazebo world))
+> https://automaticaddison.com/how-to-load-a-world-file-into-gazebo-ros-2/  
+> https://automaticaddison.com/useful-world-files-for-gazebo-and-ros-2-simulations/
+> https://github.com/osrf/gazebo/tree/gazebo11/worlds  
+
+```sh
+mkdir  ~/dev_ws/src/basic_mobile_robot/models/cafe_world
+cp -r ~/.gazebo/models/ground_plane ~/dev_ws/src/basic_mobile_robot/models/cafe_world
+cp -r ~/.gazebo/models/cafe ~/dev_ws/src/basic_mobile_robot/models/cafe_world
+cp -r ~/.gazebo/models/cafe_table ~/dev_ws/src/basic_mobile_robot/models/cafe_world
+mkdir  ~/dev_ws/src/basic_mobile_robot/worlds/cafe_world
+cp /usr/share/gazebo-11/worlds/cafe.world ~/dev_ws/src/basic_mobile_robot/worlds/cafe_world
+
+ros2 launch basic_mobile_robot load_world_into_gazebo.launch.py
+# gazebo_models_path = os.path.join(pkg_share, 'models', 'cafe_world')
+# os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
+
+```
+
+### Example B2 ( build a navigation server and a commend client )
+> https://automaticaddison.com/how-to-send-goals-to-the-ros-2-navigation-stack-nav2/  
+key files:
+> config/ekf_car_world.yaml (only slight different from original ekf_v2.yaml like simtime)  
+> params/car_world/nav2_params.yaml (only slight different from original nav2_params_galactic.yaml on speed and initial pose)  
+> models/fastfoot  (copy)  
+> models/gas_station (copy)  
+> models/house_1  (copy)  
+> models/stopW  (copy)  
+> models/two_wheeled_robot_description  
+> maps/car_world/*  
+> worlds/car_world.world  
+> rviz/car_world/nav2_config.rviz  
+> scripts/nav_to_pose.py  
+> scripts/robot_navigator.py  
+> launch/car_world/car_world_v1.launch.py  
+
+```sh
+killall gazebo; killall gzserver; killall gzclient
+ros2 launch basic_mobile_robot car_world_v1.launch.py
+ros2 run two_wheeled_robot nav_to_pose.py
 ```
