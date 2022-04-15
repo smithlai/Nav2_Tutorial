@@ -21,7 +21,7 @@ def generate_launch_description():
   pkg_share = FindPackageShare(package='basic_mobile_robot').find('basic_mobile_robot')
  
   # Set the path to the world file
-  world_file_name = 'cafe.world'
+  world_file_name = 'cafe_v1.world'
   world_path = os.path.join(pkg_share, 'worlds', 'cafe_world', world_file_name)
    
   # Set the path to the SDF model files.

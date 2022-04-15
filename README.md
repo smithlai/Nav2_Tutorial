@@ -253,6 +253,7 @@ ros2 run two_wheeled_robot nav_to_pose.py
 # known bug: nav_to_pose結束後會kill車子
 ```
 ### Example B3 ( build a navigation server and a commend client with multi-goals)
+> https://automaticaddison.com/how-to-send-a-goal-path-to-the-ros-2-navigation-stack-nav2/  
 key files:
 > params/farm_world/nav2_params.yaml
 > params/farm_world/nav2_params_static_transform_pub.yaml (*Note* tf_broadcast: false)  
@@ -267,5 +268,21 @@ key files:
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot farm_world_v1.launch.py
 ros2 run two_wheeled_robot nav_through_poses.py
+# known bug: nav_to_pose結束後會kill車子
+```
+
+### Example B4 ( build a navigation server and a commend client with waypoint_follower)
+> https://automaticaddison.com/how-to-send-waypoints-to-the-ros-2-navigation-stack-nav-2/  
+key files:
+> params/cafe_world/nav2_params.yaml  
+> maps/cafe_world/*  
+> worlds/cafe_v2.world  
+> rviz/cafe_world/nav2_config.rviz  
+> scripts/waypoint_follower.py  
+> launch/cafe_world/cafe_world_v1.launch.py  
+```sh
+killall gazebo; killall gzserver; killall gzclient
+ros2 launch basic_mobile_robot cafe_world_v1.launch.py
+ros2 run two_wheeled_robot waypoint_follower.py
 # known bug: nav_to_pose結束後會kill車子
 ```
