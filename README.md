@@ -119,7 +119,7 @@ rqt-graph
 
 ---------------------------------
 
-## Examples
+## Examples A
 
 ### Example 1 (urdf, joint_state_publisher, robot_state_publisher)
 key files:
@@ -208,6 +208,10 @@ ros2 run rqt_robot_steering rqt_robot_steering --force-discover
 ros2 run nav2_map_server map_saver_cli -f my_map
 ```
 
+## Examples B
+
+https://automaticaddison.com/how-to-send-goals-to-the-ros-2-navigation-stack-nav2/
+https://drive.google.com/drive/folders/1JP12kp4JZ6SM0E8zhxI99ERBMf3qL6QW
 
 ### Example B1 (gazebo world))
 > https://automaticaddison.com/how-to-load-a-world-file-into-gazebo-ros-2/  
@@ -228,25 +232,40 @@ ros2 launch basic_mobile_robot load_world_into_gazebo.launch.py
 
 ```
 
-### Example B2 ( build a navigation server and a commend client )
+### Example B2 ( build a navigation server and a commend client with goal )
 > https://automaticaddison.com/how-to-send-goals-to-the-ros-2-navigation-stack-nav2/  
 key files:
 > config/ekf_car_world.yaml (only slight different from original ekf_v2.yaml like simtime)  
 > params/car_world/nav2_params.yaml (only slight different from original nav2_params_galactic.yaml on speed and initial pose)  
-> models/fastfoot  (copy)  
-> models/gas_station (copy)  
-> models/house_1  (copy)  
-> models/stopW  (copy)  
+> models/fastfoot gas_station house_1 stopW (copy)  
 > models/two_wheeled_robot_description  
 > maps/car_world/*  
 > worlds/car_world.world  
 > rviz/car_world/nav2_config.rviz  
 > scripts/nav_to_pose.py  
-> scripts/robot_navigator.py  
+> scripts/robot_navigator.py  (BasicNavigator class)
 > launch/car_world/car_world_v1.launch.py  
 
 ```sh
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot car_world_v1.launch.py
 ros2 run two_wheeled_robot nav_to_pose.py
+# known bug: nav_to_pose結束後會kill車子
+```
+### Example B3 ( build a navigation server and a commend client with multi-goals)
+key files:
+> params/farm_world/nav2_params.yaml
+> params/farm_world/nav2_params_static_transform_pub.yaml (*Note* tf_broadcast: false)  
+> models/pine_tree oak_tree big_plant small_plant mud_box  (copy)  
+> maps/farm_world/*  
+> worlds/farm_world.world  
+> rviz/farm_world/nav2_config.rviz  
+> scripts/nav_through_poses.py
+> launch/farm_world/farm_world_v1.launch.py
+> launch/farm_world/farm_world_v2.launch.py
+```sh
+killall gazebo; killall gzserver; killall gzclient
+ros2 launch basic_mobile_robot farm_world_v1.launch.py
+ros2 run two_wheeled_robot nav_through_poses.py
+# known bug: nav_to_pose結束後會kill車子
 ```

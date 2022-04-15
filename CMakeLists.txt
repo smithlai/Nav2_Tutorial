@@ -19,7 +19,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 # find_package(ament_cmake_python REQUIRED)
 # find_package(rclcpp REQUIRED)
-# find_package(rclpy REQUIRED)
+find_package(rclpy REQUIRED)
 # find_package(geometry_msgs REQUIRED)
 # find_package(nav_msgs REQUIRED)
 # find_package(sensor_msgs REQUIRED)
@@ -30,10 +30,12 @@ find_package(ament_cmake REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 # Include cpp "include" directory
-# include_directories(include)
+include_directories(include)
 
 install(
-  DIRECTORY config launch maps meshes models params rviz src worlds
+  DIRECTORY config launch maps meshes models params rviz src worlds 
+  scripts
+  src include 
   DESTINATION share/${PROJECT_NAME}
 )
 # Install Python executables
@@ -41,7 +43,7 @@ install(PROGRAMS
   # scripts/run_inspection.py
   # scripts/lift_controller.py
   scripts/nav_to_pose.py
-  # scripts/nav_through_poses.py
+  scripts/nav_through_poses.py
   # scripts/pick_and_deliver.py
   scripts/robot_navigator.py
   # scripts/security_demo.py
