@@ -235,13 +235,13 @@ ros2 launch basic_mobile_robot load_world_into_gazebo.launch.py
 ### Example B2 ( build a navigation server and a commend client with goal )
 > https://automaticaddison.com/how-to-send-goals-to-the-ros-2-navigation-stack-nav2/  
 key files:
+> maps/car_world/*  
+>> worlds/car_world.world  
+>> models/fastfoot gas_station house_1 stopW (copy)  
+>> rviz/car_world/nav2_config.rviz  
 > config/ekf_car_world.yaml (only slight different from original ekf_v2.yaml like simtime)  
 > params/car_world/nav2_params.yaml (only slight different from original nav2_params_galactic.yaml on speed and initial pose)  
-> models/fastfoot gas_station house_1 stopW (copy)  
 > models/two_wheeled_robot_description  
-> maps/car_world/*  
-> worlds/car_world.world  
-> rviz/car_world/nav2_config.rviz  
 > scripts/nav_to_pose.py  
 > scripts/robot_navigator.py  (BasicNavigator class)
 > launch/car_world/car_world_v1.launch.py  
@@ -252,16 +252,19 @@ ros2 launch basic_mobile_robot car_world_v1.launch.py
 ros2 run two_wheeled_robot nav_to_pose.py
 # known bug: nav_to_pose結束後會kill車子
 ```
-### Example B3 ( build a navigation server and a commend client with multi-goals)
+### Example B3 ( add a commend client with multi-goals)
 > https://automaticaddison.com/how-to-send-a-goal-path-to-the-ros-2-navigation-stack-nav2/  
 key files:
+> worlds/farm_world.world  
+>> maps/farm_world/*  
+>> models/pine_tree oak_tree big_plant small_plant mud_box  (copy)  
+>> rviz/farm_world/nav2_config.rviz  
 > params/farm_world/nav2_params.yaml
 > params/farm_world/nav2_params_static_transform_pub.yaml (*Note* tf_broadcast: false)  
-> models/pine_tree oak_tree big_plant small_plant mud_box  (copy)  
-> maps/farm_world/*  
-> worlds/farm_world.world  
-> rviz/farm_world/nav2_config.rviz  
+>> config/ekf_car_world.yaml (only slight different from original ekf_v2.yaml like simtime)  
 > scripts/nav_through_poses.py
+>> scripts/robot_navigator.py  (BasicNavigator class)
+>> models/two_wheeled_robot_description  
 > launch/farm_world/farm_world_v1.launch.py
 > launch/farm_world/farm_world_v2.launch.py
 ```sh
@@ -271,14 +274,39 @@ ros2 run two_wheeled_robot nav_through_poses.py
 # known bug: nav_to_pose結束後會kill車子
 ```
 
-### Example B4 ( build a navigation server and a commend client with waypoint_follower)
+### Example B4 ( a commend client with waypoint_follower)
 > https://automaticaddison.com/how-to-send-waypoints-to-the-ros-2-navigation-stack-nav-2/  
 key files:
+> worlds/cafe_v2.world
+>> maps/cafe_world/*  
+>> models/*
+>> rviz/cafe_world/nav2_config.rviz  
 > params/cafe_world/nav2_params.yaml  
-> maps/cafe_world/*  
-> worlds/cafe_v2.world  
-> rviz/cafe_world/nav2_config.rviz  
 > scripts/waypoint_follower.py  
+>> scripts/robot_navigator.py  (BasicNavigator class)
+>> config/ekf_car_world.yaml (only slight different from original ekf_v2.yaml like simtime)  
+>> models/two_wheeled_robot_description  
+
+> launch/cafe_world/cafe_world_v1.launch.py  
+```sh
+killall gazebo; killall gzserver; killall gzclient
+ros2 launch basic_mobile_robot cafe_world_v1.launch.py
+ros2 run two_wheeled_robot waypoint_follower.py
+# known bug: nav_to_pose結束後會kill車子
+```
+
+### Example B5 ( a commend client with pickup)
+> https://automaticaddison.com/how-to-send-waypoints-to-the-ros-2-navigation-stack-nav-2/  
+key files:
+> worlds/office.world
+>> params/office_world/nav2_params.yaml  
+>> models/wastebasket door cafe_counter cafe_counter microwave microwave microwave tv_stand office_cafe_table desk_chair desk_chair whiteboard cubicle_corner computer office_box conference_table_small mini_fridge cubicle_island
+>> maps/office_world/*  
+> rviz/office_world/nav2_config.rviz  
+> scripts/pick_and_deliver.py  
+>> scripts/robot_navigator.py  (BasicNavigator class)
+>> models/two_wheeled_robot_description  
+
 > launch/cafe_world/cafe_world_v1.launch.py  
 ```sh
 killall gazebo; killall gzserver; killall gzclient
