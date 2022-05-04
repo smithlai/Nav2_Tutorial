@@ -317,7 +317,8 @@ ros2 run two_wheeled_robot waypoint_follower.py
 
 
 ### Example C1 (Basic urdf and launch)
-> https://github.com/ros-planning/navigation2_tutorials/tree/master/sam_bot_description
+> https://navigation.ros.org/setup_guides/urdf/setup_urdf.html  
+> https://github.com/ros-planning/navigation2_tutorials/tree/master/sam_bot_description  
 key files:
 > launch/nav2_tutorial_v1.launch.py
 > urdf/nav2_tutorial_description_v1.urdf
@@ -325,4 +326,16 @@ key files:
 ```sh
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot nav2_tutorial_v1.launch.py
+```
+
+### Example C2 (gazebo plugin and spwn)
+> https://navigation.ros.org/setup_guides/odom/setup_odom.html  
+> https://github.com/ros-planning/navigation2_tutorials/tree/master/sam_bot_description
+key files:
+> launch/nav2_tutorial_v2.launch.py
+> urdf/nav2_tutorial_description_v2.urdf
+>> rviz/nav2_tutorial_v1.rviz
+```sh
+killall gazebo; killall gzserver; killall gzclient
+ros2 launch basic_mobile_robot nav2_tutorial_v2.launch.py
 ```
