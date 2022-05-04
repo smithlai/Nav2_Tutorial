@@ -331,6 +331,11 @@ ros2 launch basic_mobile_robot nav2_tutorial_v1.launch.py
 ### Example C2 (gazebo plugin and spwn)
 > https://navigation.ros.org/setup_guides/odom/setup_odom.html  
 > https://github.com/ros-planning/navigation2_tutorials/tree/master/sam_bot_description
+
+> Note:  
+> /demo/imu, /demo/myodom  
+> defined in urdf "gazebo" "ros" tags  
+
 key files:
 > launch/nav2_tutorial_v2.launch.py
 > urdf/nav2_tutorial_description_v2.urdf
@@ -338,4 +343,25 @@ key files:
 ```sh
 killall gazebo; killall gzserver; killall gzclient
 ros2 launch basic_mobile_robot nav2_tutorial_v2.launch.py
+```
+
+### Example C3 (robot localization)
+> https://navigation.ros.org/setup_guides/odom/setup_odom.html#robot-localization-demo  
+> https://github.com/ros-planning/navigation2_tutorials/tree/master/sam_bot_description
+
+
+key files:
+> launch/nav2_tutorial_v3.launch.py
+>> urdf/nav2_tutorial_description_v2.urdf
+>> rviz/nav2_tutorial_v1.rviz
+```sh
+killall gazebo; killall gzserver; killall gzclient
+ros2 launch basic_mobile_robot nav2_tutorial_v3.launch.py
+# ros2 topic info /demo/imu
+# ros2 topic info /demo/odom
+# ros2 topic echo /odometry/filtered
+# ros2 node info /ekf_filter_node
+# ros2 run tf2_ros tf2_echo odom base_footprint
+ros2 run tf2_tools view_frames && evince frames.pdf
+
 ```
