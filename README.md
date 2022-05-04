@@ -314,3 +314,15 @@ ros2 launch basic_mobile_robot cafe_world_v1.launch.py
 ros2 run two_wheeled_robot waypoint_follower.py
 # known bug: nav_to_pose結束後會kill車子
 ```
+
+
+### Example C1 (Basic urdf and launch)
+> https://github.com/ros-planning/navigation2_tutorials/tree/master/sam_bot_description
+key files:
+> launch/nav2_tutorial_v1.launch.py
+> urdf/nav2_tutorial_description_v1.urdf
+> rviz/nav2_tutorial_v1.rviz
+```sh
+killall gazebo; killall gzserver; killall gzclient
+ros2 launch basic_mobile_robot nav2_tutorial_v1.launch.py
+```

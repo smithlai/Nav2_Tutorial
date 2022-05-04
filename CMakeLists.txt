@@ -33,7 +33,7 @@ find_package(rclpy REQUIRED)
 include_directories(include)
 
 install(
-  DIRECTORY config launch maps meshes models params rviz src worlds 
+  DIRECTORY config launch maps meshes models params rviz src urdf worlds 
   scripts
   src include 
   DESTINATION share/${PROJECT_NAME}
