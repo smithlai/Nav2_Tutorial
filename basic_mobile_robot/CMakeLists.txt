@@ -32,8 +32,20 @@ find_package(rclpy REQUIRED)
 # Include cpp "include" directory
 include_directories(include)
 
-install(
-  DIRECTORY config launch maps meshes models params rviz src urdf worlds 
+# Create Cpp executable
+# add_executable(cpp_executable src/cpp_node.cpp)
+# ament_target_dependencies(cpp_executable rclcpp)
+
+# Install Cpp executables
+# install(TARGETS
+#   cpp_executable
+#   DESTINATION lib/${PROJECT_NAME}
+# )
+
+install(DIRECTORY 
+  config 
+  launch 
+  maps meshes models params rviz src urdf worlds 
   scripts
   src include 
   DESTINATION share/${PROJECT_NAME}
